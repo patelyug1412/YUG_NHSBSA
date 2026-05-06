@@ -6,6 +6,7 @@ import pageObject.SearchPage;
 import static stepDefinition.Hooks.driver;
 import org.junit.Assert;
 
+
 public class NHSJobSearchCommonSteps{
 
     SearchPage searchPageObj = new SearchPage(driver);
@@ -45,14 +46,19 @@ public class NHSJobSearchCommonSteps{
     @And("I should see jobs found for {string} in {string}")
     public void iShouldSeeJobsFoundForIn(String position, String location) {
         String resultTitle = resultPageObj.sendSearchResultTitle();
-        Assert.assertTrue(resultTitle.toLowerCase().contains(position.toLowerCase()));
-        Assert.assertTrue(resultTitle.toLowerCase().contains(location.toLowerCase()));
-
+        Assert.assertTrue((resultTitle.toLowerCase()).contains(position.toLowerCase()));
+        Assert.assertTrue((resultTitle.toLowerCase()).contains(location.toLowerCase()));
     }
 
     @Then("I should see message {string}")
     public void iShouldSeeMessage(String expectedResult) {
         String resultTitle = resultPageObj.sendSearchResultTitle();
-        Assert.assertTrue(resultTitle.toLowerCase().contains(expectedResult.toLowerCase()));
+        Assert.assertTrue((resultTitle.toLowerCase()).contains(expectedResult.toLowerCase()));
+    }
+
+    @And("I should see results sorted by newest date posted")
+    public void iShouldSeeResultsSortedByNewestDatePosted() {
+        Assert.assertTrue("Jobs are not sorted by newest date posted",
+                resultPageObj.areDatesSortedNewestFirst());
     }
 }

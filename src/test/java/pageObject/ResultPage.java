@@ -7,6 +7,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 public class ResultPage {
     WebDriver driver;
     WaitUtils wait;
@@ -23,6 +29,8 @@ public class ResultPage {
     WebElement searchResultTitle;
     @FindBy(xpath="//h2[normalize-space()='Location not found']")
     WebElement invalidLocation;
+    @FindBy(xpath = "//li[starts-with(normalize-space(),'Date posted')]")
+    List<WebElement> postedDates;
 
     public void sortJobType(String sortType){
         wait.waitForVisibility(sortJobType);
@@ -37,4 +45,34 @@ public class ResultPage {
         wait.waitForVisibility(invalidLocation);
         return invalidLocation.getText();
     }
+    public List<String> postedDatesForFirstTenJobs(){
+        List<String> printPostedDates = new ArrayList<>();
+        for (WebElement date : postedDates) {
+            printPostedDates.add(date.getText());
+        }
+        return printPostedDates;
+    }
+
+    public boolean areDatesSortedNewestFirst() {
+        List<String> dateTexts = postedDatesForFirstTenJobs();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
+
+        for (int i = 0; i < dateTexts.size() - 1; i++) {
+            String currentDateText = dateTexts.get(i)
+                    .replace("Date posted:", "")
+                    .trim();
+            String nextDateText = dateTexts.get(i + 1)
+                    .replace("Date posted:", "")
+                    .trim();
+
+            LocalDate currentDate = LocalDate.parse(currentDateText, formatter);
+            LocalDate nextDate = LocalDate.parse(nextDateText, formatter);
+
+            if (currentDate.isBefore(nextDate)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

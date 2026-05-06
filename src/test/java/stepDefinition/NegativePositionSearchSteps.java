@@ -20,7 +20,7 @@ public class NegativePositionSearchSteps{
     @Then("I should see a message for invalid position {string}")
     public void iShouldSeeAMessageForInvalidPosition(String expectedMessage) {
         String resultTitle = resultPageObj.sendSearchResultTitle();
-        Assert.assertTrue(resultTitle.toLowerCase().contains(expectedMessage.toLowerCase()));
+        Assert.assertTrue((resultTitle.toLowerCase()).contains(expectedMessage.toLowerCase()));
     }
 
 }

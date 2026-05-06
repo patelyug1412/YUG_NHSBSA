@@ -17,6 +17,7 @@ Feature: NHS Jobs Search
     And I click on search button
     Then I sort the results by "Date Posted (newest)"
     And I should see jobs found for "<position>" in "<location>"
+    And I should see results sorted by newest date posted
 
     Examples:
       | position   | location   | distance | payRange |

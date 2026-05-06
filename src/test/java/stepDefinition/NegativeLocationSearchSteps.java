@@ -21,6 +21,6 @@ public class NegativeLocationSearchSteps{
     @Then("I should see a message for invalid location {string}")
     public void iShouldSeeAMessageForInvalidLocation(String expectedMessage) {
         String noLocationTitle = resultPageObj.sendInvalidLocationTitle();
-        Assert.assertTrue(noLocationTitle.toLowerCase().contains(expectedMessage.toLowerCase()));
+        Assert.assertTrue((noLocationTitle.toLowerCase()).contains(expectedMessage.toLowerCase()));
     }
 }

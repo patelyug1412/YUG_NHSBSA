@@ -51,7 +51,6 @@
                     <includes>
                         <include>**/TestRunner.java</include>
                     </includes>
-                    <useFile>false</useFile>
                 </configuration>
             </plugin>
         </plugins>
