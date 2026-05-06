@@ -8,8 +8,13 @@ import static stepDefinition.Hooks.driver;
 
 public class NegativePositionSearchSteps{
 
-    SearchPage searchPageObj = new SearchPage(driver);
-    ResultPage resultPageObj = new ResultPage(driver);
+    SearchPage searchPageObj;
+    ResultPage resultPageObj;
+
+    public NegativePositionSearchSteps() {
+        searchPageObj = new SearchPage(driver);
+        resultPageObj = new ResultPage(driver);
+    }
 
     @When("I search for jobs with invalid position {string} and location {string}")
     public void iSearchForJobsWithInvalidPositionAndLocation(String position, String location) {

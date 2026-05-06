@@ -8,9 +8,13 @@ import org.junit.Assert;
 
 
 public class NHSJobSearchCommonSteps{
+    SearchPage searchPageObj;
+    ResultPage resultPageObj;
 
-    SearchPage searchPageObj = new SearchPage(driver);
-    ResultPage resultPageObj = new ResultPage(driver);
+    public NHSJobSearchCommonSteps() {
+        searchPageObj = new SearchPage(driver);
+        resultPageObj = new ResultPage(driver);
+    }
 
     @When("I search for jobs with position {string} and location {string}")
     public void iSearchForJobsWithPositionAndLocation(String position, String location) {
