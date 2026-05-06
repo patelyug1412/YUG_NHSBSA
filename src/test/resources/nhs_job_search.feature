@@ -6,6 +6,7 @@ Feature: NHS Jobs Search
 
   Background:
     Given I am on the NHS Jobs search page "https://www.jobs.nhs.uk/candidate/search"
+    And Page with title "Search for jobs in the NHS" should be opened
 
   @positive
   Scenario Outline: Search jobs using multiple preferences
@@ -14,8 +15,8 @@ Feature: NHS Jobs Search
     And I click on more search options button
     And I select pay range "<payRange>"
     And I click on search button
-    Then I should see jobs found for "<position>" in "<location>"
-    And I sort the results by "Date Posted (newest)"
+    Then I sort the results by "Date Posted (newest)"
+    And I should see jobs found for "<position>" in "<location>"
 
     Examples:
       | position   | location   | distance | payRange |
@@ -40,7 +41,7 @@ Feature: NHS Jobs Search
   Scenario: Search with invalid position
     When I search for jobs with invalid position "-----" and location "Peterborough"
     And I click on search button
-    Then I should see a message for invalid position"No result found"
+    Then I should see a message for invalid position "No result found"
 
   @negative
   Scenario: Search with invalid location

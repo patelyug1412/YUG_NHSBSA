@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/nhs_job_search.feature",
         glue = "stepDefinition",
-        plugin = {"pretty", "html:src/test/resources/cucumber-report.html"},
+        plugin = {"pretty", "html:target/cucumber-report.html"},
         monochrome = true
 )
 

@@ -2,7 +2,7 @@ package stepDefinition;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.testng.Assert;
+import org.junit.Assert;
 import pageObject.ResultPage;
 import pageObject.SearchPage;
 import static stepDefinition.Hooks.driver;
