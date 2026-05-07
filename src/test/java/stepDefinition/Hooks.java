@@ -54,17 +54,23 @@ public class Hooks {
 
     @After
     public void tearDown(Scenario scenario) {
-        if (scenario.isFailed()) {
-            logger.error("Scenario failed: {}", scenario.getName());
-            byte[] screenshot = ((TakesScreenshot) driver)
-                    .getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", scenario.getName());
-            logger.info("Screenshot attached for failed scenario");
+
+        if (driver != null && scenario.isFailed()) {
+            try {
+                logger.error("Scenario failed: {}", scenario.getName());
+                byte[] screenshot = ((TakesScreenshot) driver)
+                        .getScreenshotAs(OutputType.BYTES);
+                scenario.attach(screenshot, "image/png", scenario.getName());
+                logger.info("Screenshot attached for failed scenario");
+            } catch (Exception e) {
+                logger.error("Failed to capture screenshot", e);
+            }
         }
 
         if (driver != null) {
             logger.info("Closing browser");
             driver.quit();
+            driver = null;
         }
     }
 }

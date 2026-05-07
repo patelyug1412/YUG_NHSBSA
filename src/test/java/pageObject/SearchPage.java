@@ -39,21 +39,27 @@ public class SearchPage {
         try {
             wait.waitForClickability(acceptCookiesButton);
             acceptCookiesButton.click();
+            logger.info("Cookie banner accepted");
         } catch (Exception e) {
             System.out.println("Cookie banner not displayed");
+            logger.info("Cookie banner not displayed, continuing test");
         }
     }
     public void writeJobPosition(String jobPos){
         wait.waitForVisibility(jobPosition);
         jobPosition.clear();
+        logger.info("Entering job position: {}", jobPos);
         jobPosition.sendKeys(jobPos);
     }
     public void writeJobLocation(String jobLoc){
+        wait.waitForVisibility(jobLocation);
         jobLocation.clear();
+        logger.info("Entering job location: {}", jobLoc);
         jobLocation.sendKeys(jobLoc);
     }
     public void selectJobDistance(String jobDis){
         wait.waitForVisibility(jobDistance);
+        logger.info("Selecting distance: {}", jobDis);
         Select select = new Select(jobDistance);
         select.selectByValue(jobDis);
     }
@@ -63,6 +69,7 @@ public class SearchPage {
     }
     public void selectSalaryRange(String jobSal){
         wait.waitForVisibility(jobSalaryRange);
+        logger.info("Selecting salary range: {}", jobSal);
         Select select = new Select(jobSalaryRange);
         select.selectByValue(jobSal);
     }
