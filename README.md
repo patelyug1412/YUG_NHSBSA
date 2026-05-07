@@ -35,3 +35,15 @@ The framework follows Page Object Model (POM) design pattern for:
 - Maintainability
 - Readability
 - Separation of concerns
+
+# Run tests on Selenium Grid Chrome
+In this project if you do not provide browser name,
+default browser is Chrome
+VNS Url = http://localhost:7900
+gridUrl = http://localhost:4444
+Terminal Command: mvn clean test -Dbrowser=chrome
+
+# Run tests on Selenium Grid Firefox
+VNS Url = http://localhost:7901
+gridUrl = http://localhost:4444
+Terminal Command: mvn clean test -Dbrowser=firefox

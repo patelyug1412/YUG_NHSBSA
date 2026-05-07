@@ -7,6 +7,7 @@ Feature: NHS Jobs Search
   Background:
     Given I am on the NHS Jobs search page "https://www.jobs.nhs.uk/candidate/search"
     And Page with title "Search for jobs in the NHS" should be opened
+    And I click on accept the cookies
 
   @positive
   Scenario Outline: Search jobs using multiple preferences

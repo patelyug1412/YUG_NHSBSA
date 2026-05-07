@@ -16,7 +16,8 @@ public class SearchPage {
         this.wait = new WaitUtils(driver);
         PageFactory.initElements(driver, this);
     }
-
+    @FindBy(xpath = "//button[contains(text(),'Accept additional cookies') or contains(text(),'Accept cookies') or @id='accept-cookies']")
+    WebElement acceptCookiesButton;
     @FindBy(xpath="//input[@id='keyword']")
     WebElement jobPosition;
     @FindBy(xpath="//input[@id='location']")
@@ -30,6 +31,14 @@ public class SearchPage {
     @FindBy(xpath="//input[@id='search']")
     WebElement searchButton;
 
+    public void clickAcceptCookie(){
+        try {
+            wait.waitForClickability(acceptCookiesButton);
+            acceptCookiesButton.click();
+        } catch (Exception e) {
+            System.out.println("Cookie banner not displayed");
+        }
+    }
     public void writeJobPosition(String jobPos){
         wait.waitForVisibility(jobPosition);
         jobPosition.clear();
