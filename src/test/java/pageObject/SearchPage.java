@@ -6,10 +6,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import stepDefinition.Hooks;
 
 public class SearchPage {
     WebDriver driver;
     WaitUtils wait;
+    private static final Logger logger = LoggerFactory.getLogger(SearchPage.class);
 
     public SearchPage (WebDriver driver){
         this.driver = driver;
@@ -64,6 +68,7 @@ public class SearchPage {
     }
     public void clickFinalSearch(){
         wait.waitForClickability(searchButton);
+        logger.info("Clicking search button");
         searchButton.click();
     }
 

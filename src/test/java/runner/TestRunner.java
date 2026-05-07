@@ -8,7 +8,12 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/nhs_job_search.feature",
         glue = "stepDefinition",
-        plugin = {"pretty", "html:target/cucumber-report.html"},
+        plugin = {
+                "pretty",
+                "html:target/cucumber-report.html",
+                "json:target/cucumber.json",
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+        },
         monochrome = true
 )
 

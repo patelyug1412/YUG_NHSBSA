@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,6 +18,7 @@ import java.util.Locale;
 public class ResultPage {
     WebDriver driver;
     WaitUtils wait;
+    private static final Logger logger = LoggerFactory.getLogger(ResultPage.class);
 
     public ResultPage (WebDriver driver){
         this.driver = driver;
@@ -56,7 +59,7 @@ public class ResultPage {
     public boolean areDatesSortedNewestFirst() {
         List<String> dateTexts = postedDatesForFirstTenJobs();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
-
+        logger.info("Validating job posted dates");
         for (int i = 0; i < dateTexts.size() - 1; i++) {
             String currentDateText = dateTexts.get(i)
                     .replace("Date posted:", "")
