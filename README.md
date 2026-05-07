@@ -1,48 +1,143 @@
 # YUG_NHSBSA
-Functional Acceptance Automation Test Suite for NHS Jobs Search functionality using:
+
+## NHS Jobs Search Automation Project
+This project is a Functional Acceptance Automation Test Suite for the NHS Jobs search functionality.
+The framework is developed using:
 - Java 21
 - Selenium WebDriver
 - Cucumber BDD
 - JUnit
 - Maven
-- Page Object Model (POM)
+- Docker
+- Selenium Grid
+- Allure Report
 
-Repository: https://github.com/patelyug1412/YUG_NHSBSA.git
+## Application Under Test
+https://www.jobs.nhs.uk/candidate/search
 
-# Project Objective
-This project automates the NHS Jobs Search functionality based on the provided user story and acceptance criteria.
-The framework validates that a jobseeker can:
-- Search jobs using preferences
-- View matching search results
+---
+# User Story
+As a job seeker on the NHS Jobs website,  
+I want to search for jobs with my preferences,  
+So that I can get recently posted job results.
+
+---
+
+# Features Covered
+- Search jobs using position and location
+- Search using distance filter
+- Search using pay range filter
 - Sort jobs by newest date posted
-- Validate positive and negative search scenarios
+- Validate search results
+- Validate invalid position search
+- Validate invalid location search
+- Validate no result found message
 
-
-# Technologies Used
-| Technology         | Purpose                  |
-|--------------------|--------------------------|
-| Java 21            | Programming Language     |
-| Selenium WebDriver | Browser Automation       |
-| Cucumber           | BDD Framework            |
-| JUnit              | Assertions & Test Runner |
-| Maven              | Build Management         |
-| Page Object Model  | Framework Design Pattern |
-
+---
 
 # Framework Design
-The framework follows Page Object Model (POM) design pattern for:
-- Reusability
-- Maintainability
-- Readability
-- Separation of concerns
+The framework follows:
+- BDD approach using Cucumber
+- Page Object Model (POM)
+- Reusable step definitions
+- Hooks for browser setup and teardown
+- Cross-browser execution
+- Screenshot capture for failed scenarios
+- Selenium Grid execution using Docker
 
-# Run tests on Selenium Grid Chrome
-- In this project if you do not provide browser name, default browser is Chrome
-- VNS Url = http://localhost:7900
-- gridUrl = http://localhost:4444
-- Terminal Command: mvn clean test -Dbrowser=chrome
+---
 
-# Run tests on Selenium Grid Firefox
-- VNS Url = http://localhost:7901
-- gridUrl = http://localhost:4444
-- Terminal Command: mvn clean test -Dbrowser=firefox
+# Tech Stack
+- Java 21
+- Selenium WebDriver
+- Cucumber
+- JUnit
+- Maven
+- Docker
+- Selenium Grid
+- Allure Report
+- GitHub
+
+---
+
+# Steps to Run the Project
+## 1. Clone the Repository
+```bash
+git clone https://github.com/patelyug1412/YUG_NHSBSA.git
+```
+---
+## 2. Open Project Folder
+```bash
+cd YUG_NHSBSA
+```
+---
+## 3. Start Selenium Grid using Docker Compose
+```bash
+docker-compose up -d
+```
+- This command will automatically start:
+- Selenium Chrome container
+- Selenium Firefox container
+---
+### Live Execution URLs
+- Chrome Live View:
+```bash
+http://localhost:7900
+```
+- Firefox Live View:
+```bash
+http://localhost:7901
+```
+### Selenium Grid URLs
+Chrome Grid:
+```bash
+http://localhost:4444
+```
+Firefox Grid:
+```bash
+http://localhost:4445
+```
+## 4. Run Tests in Chrome
+```bash
+mvn clean test -Dbrowser=chrome
+```
+---
+## 5. Run Tests in Firefox
+```bash
+mvn clean test -Dbrowser=firefox
+```
+---
+## 6. Stop Docker Containers
+```bash
+docker-compose down
+```
+
+# Reports
+- After test execution, the following reports are generated:
+- 
+### Cucumber HTML Report
+- Location:
+```bash
+target/cucumber-report.html
+```
+- Open the file in browser to view the execution summary.
+
+---
+
+### Allure Report
+
+- Allure result files are generated inside:
+```bash
+allure-results
+```
+- To generate and open the Allure Report:
+```bash
+allure serve allure-results
+```
+
+- The Allure Report includes:
+- Passed/Failed scenarios
+- Step execution details
+- Execution timeline
+- Failure screenshots
+- Error logs
