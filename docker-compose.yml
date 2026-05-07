@@ -1,0 +1,16 @@
+services:
+  chrome:
+    image: seleniarm/standalone-chromium:latest
+    container_name: selenium-chrome
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+    shm_size: "2g"
+
+  firefox:
+    image: seleniarm/standalone-firefox:latest
+    container_name: selenium-firefox
+    ports:
+      - "4445:4444"
+      - "7901:7900"
+    shm_size: "2g"
