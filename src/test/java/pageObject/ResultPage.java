@@ -43,6 +43,8 @@ public class ResultPage {
     WebElement previousResultPageButton;
     @FindBy(xpath = "//a[@data-test='search-result-job-title']")
     List<WebElement> allJobTitles;
+    @FindBy(xpath="//a[@id='first-result-title']")
+    WebElement firstJob;
 
     public void sortJobType(String sortType){
         wait.waitForVisibility(sortJobType);
@@ -136,6 +138,12 @@ public class ResultPage {
             currentPageJobTitles.add(allJobTitles.get(i).getText());
         }
         return currentPageJobTitles;
+    }
+
+    public void clickOnTheFirstJobTitle(){
+        scrollToElement(firstJob);
+        logger.info("Clicking on the first job title");
+        firstJob.click();
     }
 
 }

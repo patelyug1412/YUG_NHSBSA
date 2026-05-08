@@ -78,5 +78,5 @@ Feature: NHS Jobs Search
     And I click on search button
     Then I sort the results by "Date Posted (newest)"
     When I click on the first job result
-    Then I should be redirected to the job details page
+    Then I should be redirected to the page with title "Job Advert"
     And The apply button should be visible
