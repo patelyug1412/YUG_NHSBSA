@@ -45,6 +45,75 @@ public class ResultPage {
     List<WebElement> allJobTitles;
     @FindBy(xpath="//a[@id='first-result-title']")
     WebElement firstJob;
+    @FindBy(xpath="//span[normalize-space()='Contract type']")
+    WebElement contractTypeFilterBtn;
+    @FindBy(xpath="//input[@id='contract-type-permanent']")
+    WebElement checkBoxPermanentContract;
+    @FindBy(xpath="//span[normalize-space()='Working pattern']")
+    WebElement workingPatternFilterBtn;
+    @FindBy(xpath="//input[@id='working-pattern-full-time']")
+    WebElement checkboxFullTimeWorkingPattern;
+    @FindBy(xpath="//input[@id='refine-search']")
+    WebElement applyFilterBtn;
+    @FindBy(xpath = "//li[@data-test='search-result']")
+    List<WebElement> jobCards;
+    @FindBy(xpath="//a[normalize-space()='Clear filters']")
+    WebElement clearFilterBtn;
+
+    public void clickClearFilterBtn(){
+        scrollToElement(clearFilterBtn);
+        logger.info("Clicking on the clear filter button");
+        clearFilterBtn.click();
+    }
+    public boolean areAllJobsFullTime() {
+        for (WebElement jobCard : jobCards) {
+            String jobText = jobCard.getText();
+            if (!jobText.contains("Full time")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void clickWorkingPatternFilterBtn(){
+        scrollToElement(workingPatternFilterBtn);
+        logger.info("Clicking on the working pattern filter button");
+        workingPatternFilterBtn.click();
+    }
+    public void clickFullTimeWorkingPattern(){
+        scrollToElement(checkBoxPermanentContract);
+        logger.info("Selecting the checkbox for Full-time working pattern");
+        if (!checkboxFullTimeWorkingPattern.isSelected()){
+            checkboxFullTimeWorkingPattern.click();
+        }
+    }
+
+    public boolean areAllJobsPermanent() {
+        for (WebElement jobCard : jobCards) {
+            String jobText = jobCard.getText();
+            if (!jobText.contains("Permanent")) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public void clickContractTypeFilterBtn(){
+        scrollToElement(contractTypeFilterBtn);
+        logger.info("Clicking on the contract type filter button");
+        contractTypeFilterBtn.click();
+    }
+    public void clickCheckBoxPermanentContract(){
+        scrollToElement(checkBoxPermanentContract);
+        logger.info("Selecting the checkbox for permanent contract");
+        if (!checkBoxPermanentContract.isSelected()){
+            checkBoxPermanentContract.click();
+        }
+    }
+    public void clickOnApplyFilterBtn(){
+        scrollToElement(applyFilterBtn);
+        logger.info("Clicking on the apply filter button");
+        applyFilterBtn.click();
+    }
 
     public void sortJobType(String sortType){
         wait.waitForVisibility(sortJobType);
@@ -145,5 +214,37 @@ public class ResultPage {
         logger.info("Clicking on the first job title");
         firstJob.click();
     }
-
+    public boolean areJobsEitherPermanentOrFullTime() {
+        for (WebElement jobCard : jobCards) {
+            String jobText = jobCard.getText();
+            boolean hasPermanent =
+                    jobText.contains("Permanent");
+            boolean hasFullTime =
+                    jobText.contains("Full time");
+            if (!(hasPermanent || hasFullTime)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public Boolean areAllFiltersRemoved(){
+        clickContractTypeFilterBtn();
+        boolean permanentSelected = checkBoxPermanentContractButtonSelected();
+        if (permanentSelected) {
+            clickWorkingPatternFilterBtn();
+            boolean fullTimeSelected = checkBoxFullTimeWorkingPatternSelected();
+            return fullTimeSelected;
+        }
+        return false;
+    }
+    public Boolean checkBoxPermanentContractButtonSelected(){
+        scrollToElement(checkBoxPermanentContract);
+        logger.info("Verifying checkbox for permanent contract is selected or not");
+        return !checkBoxPermanentContract.isSelected();
+    }
+    public Boolean checkBoxFullTimeWorkingPatternSelected(){
+        scrollToElement(checkboxFullTimeWorkingPattern);
+        logger.info("Verifying checkbox for full-time working pattern is selected or not");
+        return !checkboxFullTimeWorkingPattern.isSelected();
+    }
 }

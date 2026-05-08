@@ -52,9 +52,9 @@ Feature: NHS Jobs Search
     And I click on search button
     Then I should see a message for invalid location "Location not found"
 
-  @clearFilters
+  @filter @clearFilters
   Scenario: Clear selected search filters
-    When I search for jobs with position "Nurse" and location "London"
+    When I search for jobs with position "Dentist" and location "Manchester"
     And I select distance "5"
     And I clear all selected filters
     Then the search filters should be cleared
@@ -74,9 +74,50 @@ Feature: NHS Jobs Search
 
   @jobDetails
   Scenario: Open first job and verify apply button
-    When I search for jobs with position "HealthCare" and location "London"
+    When I search for jobs with position "HealthCare" and location "Birmingham"
     And I click on search button
     Then I sort the results by "Date Posted (newest)"
     When I click on the first job result
     Then I should be redirected to the page with title "Job Advert"
     And The apply button should be visible
+
+  @filter @PermanentContract
+  Scenario: Filter jobs by permanent contract type
+    When I search for jobs with position "Nurse" and location "Leeds"
+    And I click on search button
+    And I click contract type filter
+    And I Select Permanent contract checkbox
+    And I click on the apply filter button
+    Then the first ten jobs should have contract type permanent
+
+  @filter @FullTimeWorkingPattern
+  Scenario: Filter jobs by full time working pattern
+    When I search for jobs with position "HealthCare" and location "London"
+    And I click on search button
+    And I click working pattern filter
+    And I select Full time working pattern checkbox
+    And I click on the apply filter button
+    Then the first ten jobs should have working pattern full time
+
+  @filter @PermanentOrFullTime
+  Scenario: Filter jobs by permanent contract or full time working pattern
+    When I search for jobs with position "Nurse" and location "London"
+    And I click on search button
+    And I click contract type filter
+    And I Select Permanent contract checkbox
+    And I click working pattern filter
+    And I select Full time working pattern checkbox
+    And I click on the apply filter button
+    Then the first ten jobs should have permanent contract or full time working pattern
+
+  @filter @ClearMultiFilter
+  Scenario: Filter jobs by permanent contract or full time working pattern
+    When I search for jobs with position "Dentist" and location "Manchester"
+    And I click on search button
+    And I click contract type filter
+    And I Select Permanent contract checkbox
+    And I click working pattern filter
+    And I select Full time working pattern checkbox
+    And I click on the apply filter button
+    And I click on clear filter button
+    Then Check all filters are removed

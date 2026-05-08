@@ -20,7 +20,7 @@ public class JobDetailPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//a[@id='apply-ats-direct']")
+    @FindBy(xpath = "//a[@id='apply'] | //a[@id='apply-ats-direct']")
     WebElement applyButton;
 
     public String getPageTitle() {
