@@ -1,6 +1,7 @@
 package pageObject;
 
 import Utility.WaitUtils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,7 @@ import java.util.Locale;
 public class ResultPage {
     WebDriver driver;
     WaitUtils wait;
+
     private static final Logger logger = LoggerFactory.getLogger(ResultPage.class);
 
     public ResultPage (WebDriver driver){
@@ -35,6 +37,12 @@ public class ResultPage {
     WebElement invalidLocation;
     @FindBy(xpath = "//li[starts-with(normalize-space(),'Date posted')]")
     List<WebElement> postedDates;
+    @FindBy(xpath = "//a[@data-test='search-next-page']")
+    WebElement nextResultPageButton;
+    @FindBy(xpath = "//a[@data-test='search-previous-page']")
+    WebElement previousResultPageButton;
+    @FindBy(xpath = "//a[@data-test='search-result-job-title']")
+    List<WebElement> allJobTitles;
 
     public void sortJobType(String sortType){
         wait.waitForVisibility(sortJobType);
@@ -89,4 +97,45 @@ public class ResultPage {
         logger.info("Job posted dates are sorted newest first");
         return true;
     }
+
+    public void clickNextPage() {
+        scrollToElement(nextResultPageButton);
+        logger.info("Clicking on the next result page");
+        nextResultPageButton.click();
+    }
+
+    public void clickPreviousPage() {
+        scrollToElement(previousResultPageButton);
+        logger.info("Clicking on the previous result page");
+        previousResultPageButton.click();
+    }
+    public void scrollToElement(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+    public List<String> getFirstPageJobs(){
+        List<String> firstPageJobTitles = new ArrayList<>();
+        logger.info("Getting job titles for the first result page");
+        for (int i = 0; i < 10 && i < allJobTitles.size(); i++) {
+            firstPageJobTitles.add(allJobTitles.get(i).getText());
+        }
+        return firstPageJobTitles;
+    }
+    public List<String> getSecondPageJobs(){
+        List<String> secondPageJobTitles = new ArrayList<>();
+        logger.info("Getting job titles for the next result page");
+        for (int i = 0; i < 10 && i < allJobTitles.size(); i++) {
+            secondPageJobTitles.add(allJobTitles.get(i).getText());
+        }
+        return secondPageJobTitles;
+    }
+    public List<String> getCurrentPageJobs(){
+        List<String> currentPageJobTitles = new ArrayList<>();
+        logger.info("Getting job titles for the current result page");
+        for (int i = 0; i < 10 && i < allJobTitles.size(); i++) {
+            currentPageJobTitles.add(allJobTitles.get(i).getText());
+        }
+        return currentPageJobTitles;
+    }
+
 }

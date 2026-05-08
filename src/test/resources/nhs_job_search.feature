@@ -59,3 +59,24 @@ Feature: NHS Jobs Search
     And I clear all selected filters
     Then the search filters should be cleared
 
+  @pagination
+  Scenario: Navigate to next and previous search result pages
+    When I search for jobs with position "Nurse" and location "London"
+    And I click on search button
+    Then I sort the results by "Date Posted (newest)"
+    And I should store the set of jobs for first page
+    When I go to the next page of results
+    Then I should store the set of jobs for second page
+    And First and second page jobs should be different
+    When I go back to the previous page of results
+    Then I should store the set of jobs for first page again
+    And Current and first page job should be same
+
+  @jobDetails
+  Scenario: Open first job and verify apply button
+    When I search for jobs with position "HealthCare" and location "London"
+    And I click on search button
+    Then I sort the results by "Date Posted (newest)"
+    When I click on the first job result
+    Then I should be redirected to the job details page
+    And The apply button should be visible
