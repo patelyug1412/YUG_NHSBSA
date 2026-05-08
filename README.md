@@ -32,9 +32,10 @@ So that I can get recently posted job results.
 - Validate search with invalid job title
 - Validate search with invalid location
 - Validate “No results found” message
-- Filter jobs by Contract Type: Permanent
-- Filter jobs by Working Pattern: Full-time
-- Validate jobs matching Permanent or Full-time filters
+- Filter jobs by Contract Type
+- Filter jobs by Working Pattern
+- Validate jobs matching contract type or working pattern filters
+- validate clear filter option 
 
 ---
 
