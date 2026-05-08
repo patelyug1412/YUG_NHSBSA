@@ -24,14 +24,17 @@ So that I can get recently posted job results.
 ---
 
 # Features Covered
-- Search jobs using position and location
-- Search using distance filter
-- Search using pay range filter
-- Sort jobs by newest date posted
-- Validate search results
-- Validate invalid position search
-- Validate invalid location search
-- Validate no result found message
+- Search jobs using job title and location
+- Search jobs using distance filter
+- Search jobs using pay range filter
+- Sort search results by newest date posted
+- Validate job search results based on user preferences
+- Validate search with invalid job title
+- Validate search with invalid location
+- Validate “No results found” message
+- Filter jobs by Contract Type: Permanent
+- Filter jobs by Working Pattern: Full-time
+- Validate jobs matching Permanent or Full-time filters
 
 ---
 
