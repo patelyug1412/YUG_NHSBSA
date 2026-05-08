@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import stepDefinition.Hooks;
 
 public class SearchPage {
     WebDriver driver;
@@ -34,6 +33,8 @@ public class SearchPage {
     WebElement jobSalaryRange;
     @FindBy(xpath="//input[@id='search']")
     WebElement searchButton;
+    @FindBy(xpath="//a[@id='clearFilters']")
+    WebElement clearFilterBtn;
 
     public void clickAcceptCookie(){
         try {
@@ -78,5 +79,25 @@ public class SearchPage {
         logger.info("Clicking search button");
         searchButton.click();
     }
-
+    public void clickClearFilterButton(){
+        wait.waitForClickability(clearFilterBtn);
+        logger.info("Clicking on clear filter button");
+        clearFilterBtn.click();
+    }
+    public String getPositionFiledValue(){
+        wait.waitForVisibility(jobPosition);
+        logger.info("Getting text from job position field");
+        return jobPosition.getText();
+    }
+    public String getLocationFiledValue(){
+        wait.waitForVisibility(jobLocation);
+        logger.info("Getting text from job location field");
+        return jobLocation.getText();
+    }
+    public String getSelectedDistance() {
+        wait.waitForVisibility(jobDistance);
+        logger.info("Getting text from job distance field");
+        Select select = new Select(jobDistance);
+        return select.getFirstSelectedOption().getText();
+    }
 }

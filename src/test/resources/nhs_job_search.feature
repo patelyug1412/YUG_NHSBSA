@@ -27,6 +27,7 @@ Feature: NHS Jobs Search
       | Admin      | Birmingham | 50       | 20-30    |
       | Dentist    | London     | 100      | 50-60    |
 
+    @empty_search
   Scenario Outline: Search jobs with different input combinations
     When I search for jobs with position "<position>" and location "<location>"
     And I click on search button
@@ -51,5 +52,10 @@ Feature: NHS Jobs Search
     And I click on search button
     Then I should see a message for invalid location "Location not found"
 
-
+  @clearFilters
+  Scenario: Clear selected search filters
+    When I search for jobs with position "Nurse" and location "London"
+    And I select distance "5"
+    And I clear all selected filters
+    Then the search filters should be cleared
 
