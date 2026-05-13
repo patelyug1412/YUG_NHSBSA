@@ -50,6 +50,44 @@ The framework follows:
 - Selenium Grid execution using Docker
 
 ---
+## Project Structure
+
+```text
+YUG_NHSBSA
+├── src
+│   └── test
+│       ├── java
+│       │   ├── Utility
+│       │   │   └── Utility/helper classes for browser setup, configuration, waits and reusable methods
+│       │   ├── pageObject
+│       │   │   └── Page Object Model classes for NHS Jobs search pages and web elements
+│       │   ├── runner
+│       │   │   └── Cucumber/JUnit test runner classes for executing feature files
+│       │   └── stepDefinition
+│       │       └── Step definition classes mapping Gherkin steps to Selenium actions
+│       │
+│       └── resources
+│           ├── nhs_job_search.feature
+│           │   └── BDD feature file covering NHS Jobs search scenarios
+│           ├── config.properties
+│           │   └── Browser, URL and execution configuration
+│           ├── allure.properties
+│           │   └── Allure report configuration
+│           └── logback.xml
+│               └── Logging configuration
+│
+├── docker-compose.yml
+│   └── Selenium Grid setup for Chrome and Firefox execution
+│
+├── pom.xml
+│   └── Maven dependencies and build configuration
+│
+├── .gitignore
+│   └── Files/folders excluded from Git tracking
+│
+└── README.md
+    └── Project documentation, setup steps and execution guide
+---
 
 # Tech Stack
 - Java 21
